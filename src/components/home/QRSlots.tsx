@@ -25,7 +25,7 @@ export function QRSlots({ xPosition, yPosition, scale }: QRSlotsProps) {
 
   const singleMode = prefs.qrSlotMode === 'single';
   const primaryQR = prefs.primaryQRId ? getQRCodeById(prefs.primaryQRId) : null;
-  const secondaryQR = prefs.secondaryQRId ? getQRCodeById(prefs.secondaryQRId) : DEFAULT_QURE_QR;
+  const secondaryQR = (prefs.secondaryQRId ? getQRCodeById(prefs.secondaryQRId) : null) ?? DEFAULT_QURE_QR;
 
   // Calculate sizes relative to viewport
   const baseSize = singleMode ? 140 : 110;

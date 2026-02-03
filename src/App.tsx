@@ -8,6 +8,7 @@ import { Export } from '@/routes/Export';
 import { Premium } from '@/routes/Premium';
 import { QRCreate } from '@/routes/QRCreate';
 import { QREdit } from '@/routes/QREdit';
+import { Onboarding } from '@/routes/Onboarding';
 import { PurchaseSuccess } from '@/routes/PurchaseSuccess';
 import { PurchaseCancel } from '@/routes/PurchaseCancel';
 
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/backgrounds" element={<Backgrounds />} />
         <Route path="/export" element={<Export />} />
         <Route path="/premium" element={<Premium />} />
+        <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/qr/new" element={<QRCreate />} />
         <Route path="/qr/:id" element={<QREdit />} />
         <Route path="/purchase/success" element={<PurchaseSuccess />} />

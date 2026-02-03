@@ -28,7 +28,7 @@ export function Home() {
   const [showControls, setShowControls] = useState(false);
 
   if (needsOnboarding) {
-    return <Navigate to="/qr/new?slot=primary&onboarding=true" replace />;
+    return <Navigate to="/onboarding" replace />;
   }
 
   const gradientIndex = GRADIENT_PRESETS.findIndex((g) => g.id === prefs.gradientId);

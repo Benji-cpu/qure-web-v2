@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 interface PageHeaderProps {
   title: string;
   onBack?: () => void;
+  showBack?: boolean;
   right?: ReactNode;
   className?: string;
 }
@@ -15,7 +16,7 @@ const BackArrow = () => (
   </svg>
 );
 
-export function PageHeader({ title, onBack, right, className }: PageHeaderProps) {
+export function PageHeader({ title, onBack, showBack = true, right, className }: PageHeaderProps) {
   const navigate = useNavigate();
 
   return (
@@ -26,12 +27,16 @@ export function PageHeader({ title, onBack, right, className }: PageHeaderProps)
         className,
       )}
     >
-      <button
-        className="flex items-center justify-center w-10 h-10 -ml-2 text-[var(--color-accent)]"
-        onClick={onBack || (() => navigate(-1))}
-      >
-        <BackArrow />
-      </button>
+      {showBack ? (
+        <button
+          className="flex items-center justify-center w-10 h-10 -ml-2 text-[var(--color-accent)]"
+          onClick={onBack || (() => navigate(-1))}
+        >
+          <BackArrow />
+        </button>
+      ) : (
+        <div className="w-10" />
+      )}
       <h1 className="flex-1 text-lg font-semibold text-center text-[var(--color-text-primary)]">{title}</h1>
       <div className="w-10 flex justify-end">
         {right}
