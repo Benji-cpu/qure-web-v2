@@ -71,8 +71,6 @@ html, body, #root {
 body {
   overscroll-behavior: none;
   touch-action: pan-x pan-y;
-  position: fixed;
-  width: 100%;
 }
 
 /* Custom scrollbar (hidden by default since no scroll) */

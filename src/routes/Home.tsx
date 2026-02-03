@@ -1,5 +1,5 @@
-import { useState, useCallback, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useCallback } from 'react';
+import { Navigate } from 'react-router-dom';
 import { usePreferences } from '@/hooks/usePreferences';
 import { useOnboarding } from '@/hooks/useOnboarding';
 import { GRADIENT_PRESETS } from '@/domain/gradients';
@@ -23,16 +23,13 @@ const SettingsIcon = () => (
 );
 
 export function Home() {
-  const navigate = useNavigate();
   const prefs = usePreferences();
   const { needsOnboarding } = useOnboarding();
   const [showControls, setShowControls] = useState(false);
 
-  useEffect(() => {
-    if (needsOnboarding) {
-      navigate('/qr/new?slot=primary&onboarding=true', { replace: true });
-    }
-  }, [needsOnboarding, navigate]);
+  if (needsOnboarding) {
+    return <Navigate to="/qr/new?slot=primary&onboarding=true" replace />;
+  }
 
   const gradientIndex = GRADIENT_PRESETS.findIndex((g) => g.id === prefs.gradientId);
   const currentIndex = gradientIndex >= 0 ? gradientIndex : 0;
@@ -95,8 +92,6 @@ export function Home() {
   const handleSlotModeChange = useCallback((v: 'single' | 'double') => {
     savePreferences({ qrSlotMode: v });
   }, []);
-
-  if (needsOnboarding) return null;
 
   return (
     <div className="flex-1 relative overflow-hidden">

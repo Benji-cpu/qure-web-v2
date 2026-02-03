@@ -3,12 +3,19 @@ import { isPremium } from '@/storage/license';
 import { subscribe } from '@/lib/storage-events';
 import { STORAGE_KEYS } from '@/lib/constants';
 
-function subscribeLicense(callback: () => void): () => void {
-  return subscribe(STORAGE_KEYS.LICENSE, callback);
-}
+let cachedRaw: string | null = undefined as unknown as string | null;
+let cachedResult = false;
 
 function getSnapshot(): boolean {
-  return isPremium();
+  const raw = localStorage.getItem(STORAGE_KEYS.LICENSE);
+  if (raw === cachedRaw) return cachedResult;
+  cachedRaw = raw;
+  cachedResult = isPremium();
+  return cachedResult;
+}
+
+function subscribeLicense(callback: () => void): () => void {
+  return subscribe(STORAGE_KEYS.LICENSE, callback);
 }
 
 export function usePremium(): boolean {
