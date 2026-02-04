@@ -19,7 +19,7 @@ export function PricingCard({ onPurchase }: PricingCardProps) {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 p-6 bg-[var(--color-bg-secondary)] rounded-2xl border border-[var(--color-border)]">
+    <div className="flex flex-col items-center gap-4 p-6 bg-[var(--color-glass-card)] backdrop-blur-xl rounded-2xl border border-[var(--color-glass-border)]">
       <div className="text-4xl">⭐</div>
       <div className="text-center">
         <div className="text-3xl font-bold text-[var(--color-text-primary)]">{PREMIUM_PRICE}</div>

@@ -39,7 +39,7 @@ export function QRForm({ type, data, onChange }: QRFormProps) {
                 {field.label}
               </label>
               <select
-                className="h-11 px-3 rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-text-primary)] outline-none"
+                className="h-11 px-3 rounded-xl bg-[var(--color-glass-input)] backdrop-blur-lg border border-[var(--color-glass-border)] text-[var(--color-text-primary)] outline-none"
                 value={data[field.key] ?? field.options[0]?.value ?? ''}
                 onChange={(e) => handleFieldChange(field.key, e.target.value)}
               >

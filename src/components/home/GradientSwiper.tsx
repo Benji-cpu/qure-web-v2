@@ -13,7 +13,7 @@ interface GradientSwiperProps {
 export function GradientSwiper({ currentIndex, onIndexChange, customGradient, backgroundImage }: GradientSwiperProps) {
   const startX = useRef(0);
   const [swipeDelta, setSwipeDelta] = useState(0);
-  const [transitioning, setTransitioning] = useState(false);
+  const [prevGradientIndex, setPrevGradientIndex] = useState<number | null>(null);
 
   const allGradients = customGradient ? [...GRADIENT_PRESETS, customGradient] : GRADIENT_PRESETS;
 
@@ -30,18 +30,21 @@ export function GradientSwiper({ currentIndex, onIndexChange, customGradient, ba
   const handleTouchEnd = useCallback(() => {
     const threshold = 50;
     if (Math.abs(swipeDelta) > threshold && !backgroundImage) {
-      setTransitioning(true);
       if (swipeDelta < 0 && currentIndex < allGradients.length - 1) {
+        setPrevGradientIndex(currentIndex);
         onIndexChange(currentIndex + 1);
+        setTimeout(() => setPrevGradientIndex(null), 500);
       } else if (swipeDelta > 0 && currentIndex > 0) {
+        setPrevGradientIndex(currentIndex);
         onIndexChange(currentIndex - 1);
+        setTimeout(() => setPrevGradientIndex(null), 500);
       }
-      setTimeout(() => setTransitioning(false), 500);
     }
     setSwipeDelta(0);
   }, [swipeDelta, currentIndex, allGradients.length, onIndexChange, backgroundImage]);
 
   const currentGradient = allGradients[currentIndex] ?? allGradients[0]!;
+  const prevGradient = prevGradientIndex !== null ? allGradients[prevGradientIndex] : null;
 
   return (
     <div
@@ -50,21 +53,20 @@ export function GradientSwiper({ currentIndex, onIndexChange, customGradient, ba
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Current gradient */}
+      {/* Previous gradient stays fully visible underneath during transition */}
+      {prevGradient && (
+        <GradientBackground
+          gradient={prevGradient}
+          backgroundImage={backgroundImage}
+        />
+      )}
+
+      {/* Current gradient fades in on top */}
       <GradientBackground
         gradient={currentGradient}
         backgroundImage={backgroundImage}
-        opacity={transitioning ? 0 : 1}
+        className={prevGradient ? 'animate-[fadeIn_500ms_ease]' : undefined}
       />
-
-      {/* Next/prev gradient for crossfade */}
-      {transitioning && (
-        <GradientBackground
-          gradient={currentGradient}
-          backgroundImage={backgroundImage}
-          className="animate-[fadeIn_500ms_ease]"
-        />
-      )}
     </div>
   );
 }

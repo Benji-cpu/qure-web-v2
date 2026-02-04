@@ -112,7 +112,7 @@ export function QRCreate() {
 
       {/* Save button */}
       {selectedType && (
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-[var(--color-bg-primary)]/80 backdrop-blur-xl border-t border-[var(--color-border)]">
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-[var(--color-glass)] backdrop-blur-xl border-t border-[var(--color-glass-border)]">
           <Button className="w-full" disabled={!canSave} onClick={handleSave}>
             Save QR Code
           </Button>

@@ -18,7 +18,7 @@ export function Input({ label, error, className, id, ...props }: InputProps) {
       <input
         id={inputId}
         className={cn(
-          'h-11 px-3 rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]',
+          'h-11 px-4 rounded-xl bg-[var(--color-glass-input)] backdrop-blur-lg border border-[var(--color-glass-border)]',
           'text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)]',
           'outline-none transition-all duration-150',
           'focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]',

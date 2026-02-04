@@ -17,7 +17,7 @@ export function DeviceSelector({ value, onChange }: DeviceSelectorProps) {
             'flex flex-col items-start px-3 py-2 rounded-xl border transition-all duration-150 text-left',
             value === preset.id
               ? 'bg-[var(--color-accent)]/10 border-[var(--color-accent)] text-[var(--color-accent)]'
-              : 'bg-[var(--color-bg-secondary)] border-[var(--color-border)] text-[var(--color-text-primary)]',
+              : 'bg-[var(--color-glass-card)] backdrop-blur-xl border-[var(--color-glass-border)] text-[var(--color-text-primary)]',
           )}
           onClick={() => onChange(preset)}
         >

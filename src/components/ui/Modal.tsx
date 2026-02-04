@@ -25,7 +25,7 @@ export function Modal({ open, onClose, children, className }: ModalProps) {
       <div className="absolute inset-0 bg-[var(--color-overlay)] backdrop-blur-sm animate-[fadeIn_150ms_ease]" onClick={onClose} />
       <div
         className={cn(
-          'relative z-10 w-full max-w-sm bg-[var(--color-bg-secondary)] rounded-2xl p-6 shadow-[var(--shadow-lg)]',
+          'relative z-10 w-full max-w-sm bg-[var(--color-glass-elevated)] backdrop-blur-2xl border border-[var(--color-glass-border)] rounded-2xl p-6 shadow-[var(--shadow-lg)]',
           'animate-[scaleIn_150ms_ease]',
           className,
         )}

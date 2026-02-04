@@ -25,7 +25,7 @@ export function BottomSheet({ open, onClose, children, className }: BottomSheetP
       <div className="absolute inset-0 bg-[var(--color-overlay)] animate-[fadeIn_150ms_ease]" onClick={onClose} />
       <div
         className={cn(
-          'relative z-10 w-full max-w-[430px] bg-[var(--color-bg-secondary)] rounded-t-2xl',
+          'relative z-10 w-full max-w-[430px] bg-[var(--color-glass-elevated)] backdrop-blur-2xl border-t border-[var(--color-glass-border)] rounded-t-2xl',
           'pb-[env(safe-area-inset-bottom)] animate-[slideUp_200ms_ease]',
           className,
         )}

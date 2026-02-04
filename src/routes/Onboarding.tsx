@@ -8,22 +8,23 @@ import { setPrimaryQR, setSecondaryQR } from '@/storage/preferences';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Button } from '@/components/ui/Button';
+import { QRTypeCard } from '@/components/qr/QRTypeCard';
 
-const ONBOARDING_TYPES: QRCodeType[] = ['whatsapp', 'instagram', 'link', 'phone', 'email'];
+const ONBOARDING_TYPES: QRCodeType[] = ['whatsapp', 'link'];
 
 export function Onboarding() {
   const navigate = useNavigate();
   const [selectedType, setSelectedType] = useState<QRCodeType>('whatsapp');
-  const [formData, setFormData] = useState<Record<string, string>>({});
+  const [formData, setFormData] = useState<Record<string, string>>({ message: 'Hi! I scanned your QR code' });
 
   const typeConfig = QR_TYPES.find((c) => c.type === selectedType);
-  const requiredFields = typeConfig?.fields.filter((f) => f.required) ?? [];
+  const requiredFields = typeConfig?.fields.filter((f) => f.required || (selectedType === 'whatsapp' && f.key === 'message')) ?? [];
 
   const canSave = canGenerateQRCode(selectedType, formData);
 
   const handleTypeChange = (type: QRCodeType) => {
     setSelectedType(type);
-    setFormData({});
+    setFormData(type === 'whatsapp' ? { message: 'Hi! I scanned your QR code' } : {});
   };
 
   const handleFieldChange = (key: string, value: string) => {
@@ -50,8 +51,8 @@ export function Onboarding() {
 
   return (
     <div className="flex flex-col h-full bg-[var(--color-bg-primary)]">
-      <div className="flex-1 overflow-y-auto px-6 pt-[env(safe-area-inset-top)] pb-28">
-        <div className="flex flex-col gap-8 pt-12">
+      <div className="flex-1 overflow-y-auto px-4 pt-[env(safe-area-inset-top)] mt-3 pb-28">
+        <div className="flex flex-col gap-6 pt-4">
           {/* Section A — Welcome */}
           <div className="flex flex-col items-center gap-4 text-center">
             {/* Mini phone mockup with QR silhouettes */}
@@ -63,7 +64,7 @@ export function Onboarding() {
               <div className="absolute top-2 left-1/2 -translate-x-1/2 w-8 h-1 rounded-full bg-white/20" />
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 max-w-[280px] mx-auto">
               <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
                 Welcome to QuRe
               </h1>
@@ -74,30 +75,23 @@ export function Onboarding() {
           </div>
 
           {/* Section B — Quick setup form */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-6">
             <h2 className="text-lg font-semibold text-[var(--color-text-primary)]">
               Let's create your first QR code
             </h2>
 
-            {/* Type pills */}
-            <div className="flex flex-wrap gap-2">
+            {/* Type cards */}
+            <div className="grid grid-cols-2 gap-3">
               {ONBOARDING_TYPES.map((type) => {
                 const config = QR_TYPES.find((c) => c.type === type);
                 if (!config) return null;
-                const isSelected = selectedType === type;
                 return (
-                  <button
+                  <QRTypeCard
                     key={type}
-                    className={`flex items-center gap-1.5 px-4 h-9 rounded-full text-sm font-medium transition-all duration-150 ${
-                      isSelected
-                        ? 'bg-[var(--color-accent)] text-white'
-                        : 'bg-[var(--color-bg-tertiary)] text-[var(--color-text-secondary)]'
-                    }`}
+                    config={config}
+                    selected={selectedType === type}
                     onClick={() => handleTypeChange(type)}
-                  >
-                    <span>{config.icon}</span>
-                    <span>{config.title}</span>
-                  </button>
+                  />
                 );
               })}
             </div>
@@ -124,7 +118,7 @@ export function Onboarding() {
                         {field.label}
                       </label>
                       <select
-                        className="h-11 px-3 rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-border)] text-[var(--color-text-primary)] outline-none"
+                        className="h-11 px-3 rounded-xl bg-[var(--color-glass-input)] backdrop-blur-lg border border-[var(--color-glass-border)] text-[var(--color-text-primary)] outline-none"
                         value={formData[field.key] ?? field.options[0]?.value ?? ''}
                         onChange={(e) => handleFieldChange(field.key, e.target.value)}
                       >
@@ -153,7 +147,7 @@ export function Onboarding() {
       </div>
 
       {/* Section C — Sticky save button */}
-      <div className="absolute bottom-0 left-0 right-0 p-5 bg-[var(--color-bg-primary)]/80 backdrop-blur-xl border-t border-[var(--color-border)]">
+      <div className="absolute bottom-0 left-0 right-0 p-4 pb-[env(safe-area-inset-bottom)] bg-[var(--color-glass)] backdrop-blur-xl border-t border-[var(--color-glass-border)]">
         <Button className="w-full" size="lg" disabled={!canSave} onClick={handleSave}>
           Get Started
         </Button>

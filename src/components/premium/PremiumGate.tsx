@@ -17,7 +17,7 @@ export function PremiumGate({ children, fallback }: PremiumGateProps) {
   if (fallback) return <>{fallback}</>;
 
   return (
-    <div className="flex flex-col items-center gap-3 p-4">
+    <div className="flex flex-col items-center gap-3 p-4 bg-[var(--color-glass-card)] backdrop-blur-xl rounded-2xl border border-[var(--color-glass-border)]">
       <span className="text-2xl">⭐</span>
       <p className="text-sm text-[var(--color-text-secondary)] text-center">
         This feature is available with Premium.

@@ -19,7 +19,7 @@ export function Textarea({ label, error, className, id, ...props }: TextareaProp
         id={textareaId}
         rows={3}
         className={cn(
-          'px-3 py-2.5 rounded-xl bg-[var(--color-bg-tertiary)] border border-[var(--color-border)]',
+          'px-4 py-3 rounded-xl bg-[var(--color-glass-input)] backdrop-blur-lg border border-[var(--color-glass-border)]',
           'text-[var(--color-text-primary)] placeholder:text-[var(--color-text-tertiary)]',
           'outline-none transition-all duration-150 resize-none',
           'focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]',

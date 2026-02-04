@@ -17,7 +17,7 @@ export function CustomGradientEditor({ initialColor1 = '#0f2027', initialColor2 
     <div className="flex flex-col gap-4">
       {/* Preview */}
       <div
-        className="w-full h-24 rounded-xl border border-[var(--color-border)]"
+        className="w-full h-24 rounded-xl border border-[var(--color-glass-border)]"
         style={{ background: `linear-gradient(135deg, ${color1}, ${color2})` }}
       />
 

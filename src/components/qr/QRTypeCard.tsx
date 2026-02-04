@@ -14,7 +14,7 @@ export function QRTypeCard({ config, selected, onClick }: QRTypeCardProps) {
         'flex flex-col items-center justify-center gap-1 p-3 rounded-xl border transition-all duration-150 active:scale-[0.95]',
         selected
           ? 'bg-[var(--color-accent)]/10 border-[var(--color-accent)] text-[var(--color-accent)]'
-          : 'bg-[var(--color-bg-secondary)] border-[var(--color-border)] text-[var(--color-text-primary)]',
+          : 'bg-[var(--color-glass-card)] backdrop-blur-xl border-[var(--color-glass-border)] text-[var(--color-text-primary)]',
       )}
       onClick={onClick}
     >

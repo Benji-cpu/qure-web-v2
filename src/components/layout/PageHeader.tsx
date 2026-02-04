@@ -23,7 +23,7 @@ export function PageHeader({ title, onBack, showBack = true, right, className }:
     <header
       className={cn(
         'flex items-center h-12 px-4 pt-[env(safe-area-inset-top)]',
-        'bg-[var(--color-bg-primary)]/80 backdrop-blur-xl',
+        'bg-[var(--color-glass)] backdrop-blur-xl border-b border-[var(--color-glass-border)]',
         className,
       )}
     >

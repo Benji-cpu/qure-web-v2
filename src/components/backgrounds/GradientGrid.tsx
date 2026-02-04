@@ -42,10 +42,10 @@ export function GradientGrid({ selectedId, onSelect, onCustomClick }: GradientGr
       <button
         className={cn(
           'aspect-[3/4] rounded-xl border-2 transition-all duration-150 active:scale-[0.95] relative overflow-hidden',
-          'bg-[var(--color-bg-tertiary)] flex flex-col items-center justify-center gap-1',
+          'bg-[var(--color-glass-card)] backdrop-blur-xl flex flex-col items-center justify-center gap-1',
           selectedId === 'custom'
             ? 'border-[var(--color-accent)] ring-2 ring-[var(--color-accent)]/30'
-            : 'border-[var(--color-border)]',
+            : 'border-[var(--color-glass-border)]',
         )}
         onClick={() => {
           if (isPremiumUser) onCustomClick();

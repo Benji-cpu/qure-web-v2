@@ -68,7 +68,7 @@ export function ImageUploader({ currentImage, onUpload, onRemove }: ImageUploade
       </div>
 
       {currentImage && (
-        <div className="w-full h-20 rounded-xl overflow-hidden border border-[var(--color-border)]">
+        <div className="w-full h-20 rounded-xl overflow-hidden border border-[var(--color-glass-border)]">
           <img src={currentImage} alt="Background" className="w-full h-full object-cover" />
         </div>
       )}
